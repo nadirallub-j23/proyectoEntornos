@@ -9,6 +9,7 @@ public class Serie extends Multimedia{
 	
 	//Constructor por defecto
 	public Serie() {
+		super();
 		temporadas=0;
 		numCapitulos=0;
 		actores="";
@@ -16,7 +17,7 @@ public class Serie extends Multimedia{
 	}
 
 	//Constructor por parametros
-	public Serie(String titulo, Genero genero, int anio, String autor, float puntuacion, String descripcion,
+	public Serie(String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
 			String fechaInicio, String personajes, int temporadas, int numCapitulos, String actores, String fechaFin) {
 		super(titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, personajes);
 		this.temporadas = temporadas;

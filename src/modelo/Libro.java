@@ -8,12 +8,15 @@ public class Libro extends Multimedia {
 
 	// Constructor por defecto
 	public Libro() {
+		super();
 		numPaginas = 0;
 		fechaFin = "";
+		
+		
 	}
 
 	// Constructor por parametros
-	public Libro(String titulo, Genero genero, int anio, String autor, float puntuacion, String descripcion,
+	public Libro(String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
 			String fechaInicio, String personajes, int numPaginas, String fechaFin) {
 		super(titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, personajes);
 		this.numPaginas = numPaginas;

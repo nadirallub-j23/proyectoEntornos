@@ -8,12 +8,13 @@ public class Pelicula extends Multimedia {
 
 	//Constructor por defecto
 	public Pelicula() {
+		super();
 		duracion = 0;
 		actores = "";
 	}
 
 	//Constructor por parametros
-	public Pelicula(String titulo, Genero genero, int anio, String autor, float puntuacion, String descripcion,
+	public Pelicula(String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
 			String fechaInicio, String personajes, int duracion, String actores) {
 		super(titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, personajes);
 		this.duracion = duracion;

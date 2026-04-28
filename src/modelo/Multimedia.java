@@ -3,12 +3,12 @@ package modelo;
 public class Multimedia {
 
 	//Atributos
-	 public enum Genero {
+	 public enum GENERO {
 	        ROMANCE, ACCION, SUSPENSE, FANTASIA, TERROR, COMEDIA, DOCUMENTAL,HISTORICO,DRAMA,CIENCIA_FICCION
 	    }
 
 	    private String titulo;
-	    private Genero genero;
+	    private GENERO genero;
 	    private int anio;
 	    private String autor;
 	    private float puntuacion;
@@ -18,7 +18,7 @@ public class Multimedia {
 	    
 	    //Constructor por defecto
 	    public Multimedia() {
-	    	genero=Genero.FANTASIA;
+	    	genero=GENERO.FANTASIA;
 	    	titulo="";
 	    	anio=0;
 	    	autor="";
@@ -30,7 +30,7 @@ public class Multimedia {
 	    }
 
 	  //Constructor por parametros
-		public Multimedia(String titulo, Genero genero, int anio, String autor, float puntuacion, String descripcion,
+		public Multimedia(String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
 				String fechaInicio, String personajes) {
 			super();
 			this.titulo = titulo;
@@ -51,11 +51,11 @@ public class Multimedia {
 			this.titulo = titulo;
 		}
 
-		public Genero getGenero() {
+		public GENERO getGenero() {
 			return genero;
 		}
 
-		public void setGenero(Genero genero) {
+		public void setGenero(GENERO genero) {
 			this.genero = genero;
 		}
 
