@@ -13,6 +13,7 @@ import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import java.awt.Color;
 
 
 public class VntConsulta extends JPanel {
@@ -24,21 +25,25 @@ public class VntConsulta extends JPanel {
 	DefaultTableModel modeloTablaSeries = new DefaultTableModel();
 	DefaultTableModel modeloTablaPeliculas = new DefaultTableModel();
 	DefaultTableModel modeloTablaLibros = new DefaultTableModel();
+	private JComboBox cmbGenero;
 
 	/**
 	 * Create the panel.
 	 */
 	public VntConsulta() {
+		setBackground(new Color(240, 242, 245));
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("MIS PELICULAS");
-		lblNewLabel.setFont(new Font("Sylfaen", Font.BOLD, 20));
+		lblNewLabel.setForeground(new Color(44, 62, 80)); 
+		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
 		lblNewLabel.setBounds(297, 103, 166, 33);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("MIS LIBROS");
-		lblNewLabel_1_1.setFont(new Font("Sylfaen", Font.BOLD, 20));
-		lblNewLabel_1_1.setBounds(348, 539, 116, 39);
+		lblNewLabel_1_1.setForeground(new Color(44, 62, 80));
+		lblNewLabel_1_1.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		lblNewLabel_1_1.setBounds(348, 539, 140, 39);
 		add(lblNewLabel_1_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -46,6 +51,7 @@ public class VntConsulta extends JPanel {
 		add(scrollPane);
 		
 		tablaPeliculas = new JTable();
+		tablaPeliculas.setRowHeight(25);
 		scrollPane.setViewportView(tablaPeliculas);
 		
 		modeloTablaPeliculas.setColumnIdentifiers(new Object[] {"Titulo", "Genero", "Año", "Director","Puntuacion","Descripcion",
@@ -60,6 +66,7 @@ public class VntConsulta extends JPanel {
 		add(scrollPane_1);
 		
 		tablaLibros = new JTable();
+		tablaLibros.setRowHeight(25);
 		scrollPane_1.setViewportView(tablaLibros);
 		
 		modeloTablaLibros.setColumnIdentifiers(new Object[] {"Titulo", "Genero", "Año", "Autor","Puntuacion","Descripcion",
@@ -75,6 +82,7 @@ public class VntConsulta extends JPanel {
 		add(scrollPane_2);
 		
 		tablaSeries = new JTable();
+		tablaSeries.setRowHeight(25);
 		scrollPane_2.setViewportView(tablaSeries);
 		
 
@@ -87,25 +95,28 @@ public class VntConsulta extends JPanel {
 		modeloTablaSeries.setRowCount(0);
 		
 		JLabel lblMisLibros = new JLabel("MIS SERIES");
-		lblMisLibros.setBounds(1204, 95, 127, 48);
+		lblMisLibros.setForeground(new Color(44, 62, 80));
+		lblMisLibros.setBounds(1204, 95, 200, 48);
 		add(lblMisLibros);
-		lblMisLibros.setFont(new Font("Sylfaen", Font.BOLD, 20));
+		lblMisLibros.setFont(new Font("Segoe UI", Font.BOLD, 22));
 		
 		JButton btnBorrar = new JButton("BORRAR");
-		btnBorrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnBorrar.setBackground(new Color(231, 76, 60)); 
+		btnBorrar.setForeground(new Color(44, 62, 80));
+		btnBorrar.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		btnBorrar.setBounds(1204, 617, 127, 39);
 		add(btnBorrar);
 		
 		JButton btnModificar = new JButton("MODIFICAR");
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnModificar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnModificar.setBackground(new Color(52, 152, 219)); 
+		btnModificar.setForeground(new Color(44, 62, 80));
+		btnModificar.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		btnModificar.setBounds(974, 617, 127, 39);
 		add(btnModificar);
 		
 		JSlider sliderPuntuacion = new JSlider();
+		sliderPuntuacion.setBackground(new Color(240, 242, 245));
+		sliderPuntuacion.setForeground(new Color(44, 62, 80));
 		sliderPuntuacion.setMajorTickSpacing(1);
 		sliderPuntuacion.setPaintTicks(true);
 		sliderPuntuacion.setPaintLabels(true);
@@ -115,18 +126,29 @@ public class VntConsulta extends JPanel {
 		add(sliderPuntuacion);
 		
 		JLabel lblNewLabel_1 = new JLabel("Puntuación");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_1.setForeground(new Color(44, 62, 80));
+		lblNewLabel_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(974, 783, 94, 14);
 		add(lblNewLabel_1);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(1078, 711, 253, 22);
-		add(comboBox);
+		cmbGenero = new JComboBox();
+		cmbGenero.setBounds(1078, 711, 253, 22);
+		add(cmbGenero);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Genero");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1_2.setBounds(974, 713, 94, 14);
+		lblNewLabel_1_2.setForeground(new Color(44, 62, 80));
+		lblNewLabel_1_2.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabel_1_2.setBounds(974, 713, 94, 20);
 		add(lblNewLabel_1_2);
 
+	}
+	
+	public void cargarComboGenero() {
+	    cmbGenero.removeAllItems();
+	    cmbGenero.addItem("Seleccione un género..."); 
+	    
+	    for (GENERO g : GENERO.values()) {
+	        cmbGenero.addItem(g);
+	    }
 	}
 }

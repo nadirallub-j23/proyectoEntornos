@@ -78,6 +78,7 @@ public class VntPrincipal extends JFrame {
 		contentPane.setLayout(new CardLayout(0, 0));
 		VntConsulta consulta = new VntConsulta();
 		cambiaPanel(consulta);
+		consulta.cargarComboGenero();
 
 	}
 	
