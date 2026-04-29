@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+import javax.swing.JButton;
 
 public class VntPrincipal extends JFrame {
 
@@ -46,13 +47,18 @@ public class VntPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
+		
+		
+		
 		JMenu mnNewMenu = new JMenu("INSERTAR");
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmPelicula = new JMenuItem("Pelicula");
 		mntmPelicula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//llamar con cambiapanel al inserta
+				VntInsertaPelicula insertaPeli = new VntInsertaPelicula();
+				insertaPeli.cargarComboGenero();
+				cambiaPanel(insertaPeli);
 			}
 		});
 		mnNewMenu.add(mntmPelicula);
@@ -76,10 +82,24 @@ public class VntPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
+		
+		JMenu mnConsultar = new JMenu("CONSULTAR");
+		menuBar.add(mnConsultar);
+
+		
+		JMenuItem mntmVerTablas = new JMenuItem("Ver Todo");
+		mntmVerTablas.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        VntConsulta consulta = new VntConsulta();
+		        consulta.cargarComboGenero(); 
+		        cambiaPanel(consulta);
+		    }
+		});
+		
+		mnConsultar.add(mntmVerTablas);
 		VntConsulta consulta = new VntConsulta();
 		cambiaPanel(consulta);
 		consulta.cargarComboGenero();
-
 	}
 	
 	public void cambiaPanel(JPanel nuevoPanel) {
@@ -88,5 +108,4 @@ public class VntPrincipal extends JFrame {
 		contentPane.repaint();
 		contentPane.revalidate();
 	}
-
 }
