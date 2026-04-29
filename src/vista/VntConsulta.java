@@ -7,10 +7,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controlador.BBDD;
 import modelo.Multimedia.GENERO;
+import modelo.Serie;
+
 import javax.swing.JButton;
 import javax.swing.JSlider;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.Color;
@@ -26,7 +30,7 @@ public class VntConsulta extends JPanel {
 	DefaultTableModel modeloTablaPeliculas = new DefaultTableModel();
 	DefaultTableModel modeloTablaLibros = new DefaultTableModel();
 	private JComboBox cmbGenero;
-
+	private BBDD bd = new BBDD();
 	/**
 	 * Create the panel.
 	 */
@@ -140,6 +144,11 @@ public class VntConsulta extends JPanel {
 		lblNewLabel_1_2.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblNewLabel_1_2.setBounds(974, 713, 94, 20);
 		add(lblNewLabel_1_2);
+		
+		
+		
+		cargarComboGenero(); //carga el combo de géneros con los valores del enum (ACCION, DRAMA, COMEDIA...) para que aparezcan en el desplegable cuando abres el panel
+	    cargarSeries();//consulta la base de datos y carga todas las series que tienes insertadas en la tabla tablaSeries para que las veas nada más abrir el panel.
 
 	}
 	
@@ -149,6 +158,43 @@ public class VntConsulta extends JPanel {
 	    
 	    for (GENERO g : GENERO.values()) {
 	        cmbGenero.addItem(g);
+	    }
+	}
+	
+	/**
+	 * Carga todas las series desde la base de datos y las muestra en la tabla de la interfaz.
+	 * 
+	 * Este método realiza los siguientes pasos:
+	 * 1. Limpia el contenido actual de la tabla.
+	 * 2. Consulta la base de datos para obtener todas las series.
+	 * 3. Recorre la lista de series obtenidas.
+	 * 4. Añade cada serie como una fila en el modelo de la tabla.
+	 * 
+	 * Notas:
+	 * - Se utiliza un objeto de tipo BBDD para acceder a los datos.
+	 * - El campo "director" no aplica a series, por eso se deja vacío.
+	 * - El orden de los datos debe coincidir con el modelo de columnas de la tabla.
+	 */
+	public void cargarSeries() {
+	    modeloTablaSeries.setRowCount(0); // limpiamos la tabla
+	    BBDD bd = new BBDD();
+	    ArrayList<Serie> arrSeries = new ArrayList<>();
+	    arrSeries = bd.consultarSeries();
+	    for (Serie s : arrSeries) {
+	        modeloTablaSeries.addRow(new Object[] {
+	            s.getTitulo(),
+	            s.getGenero(),
+	            s.getAnio(),
+	            "", // director no existe en serie
+	            s.getPuntuacion(),
+	            s.getDescripcion(),
+	            s.getFechaInicio(),
+	            s.getPersonajes(),
+	            s.getTemporadas(),
+	            s.getNumCapitulos(),
+	            s.getActores(),
+	            s.getFechaFin()
+	        });
 	    }
 	}
 }

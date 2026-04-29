@@ -5,10 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.BBDD;
+
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
@@ -22,7 +27,23 @@ public class VntPrincipal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+	
+    
 	public static void main(String[] args) {
+		BBDD bd = new BBDD();
+	    if (!bd.verificarConexion()) {
+	        JOptionPane.showMessageDialog(
+	            null,
+	            "No se ha podido conectar a la base de datos.\n" +
+	            "Por favor, abre XAMPP e inicia el MySQL\n" +
+	            "antes de ejecutar la aplicación.",
+	            "ERROR DE CONEXION!!",
+	            JOptionPane.ERROR_MESSAGE
+	        );
+	        System.exit(0); 
+	    }
+	    
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -67,6 +88,8 @@ public class VntPrincipal extends JFrame {
 		mntmSerie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//llamar con cambiapanel al inserta
+				VntInsertaSerie serie = new VntInsertaSerie();
+				cambiaPanel(serie);
 			}
 		});
 		mnNewMenu.add(mntmSerie);
