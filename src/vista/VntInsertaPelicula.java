@@ -182,6 +182,7 @@ public class VntInsertaPelicula extends JPanel {
 				miPeli.setAutor(textDirector.getText());
 				miPeli.setPuntuacion(sliderPuntuacion.getValue());
 				miPeli.setDescripcion(textArea.getText());
+				miPeli.setFechaInicio(txtFecha.getText());
 				miPeli.setDuracion((int) spinnerDuracion.getValue());
 				miPeli.setPersonajes(txtPersonajes.getText());
 	            miPeli.setActores(txtActores.getText());
