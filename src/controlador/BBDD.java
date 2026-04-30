@@ -22,7 +22,7 @@ public class BBDD {
 	 * Verifica si la conexión a la base de datos está disponible.
 	 * Intenta conectarse a la base de datos y si lo consigue devuelve true.
 	 * Si no lo consigue, por ejemplo porque XAMPP no está abierto, devuelve false.
-	 *
+	 *  
 	 * @return true si la conexión fue exitosa, false si no se pudo conectar
 	 */
 	public boolean verificarConexion() {
@@ -35,116 +35,37 @@ public class BBDD {
 		}
 	}
 	
-	/**
-	 * Inserta una serie en la base de datos.
-	 * Como la tabla serie hereda de multimedia, primero inserta los datos
-	 * comunes en multimedia y luego los datos propios de la serie en serie.
-	 *
-	 * @param titulo      Título de la serie
-	 * @param genero      Género de la serie (ACCION, DRAMA, COMEDIA...)
-	 * @param anio        Año de estreno de la serie
-	 * @param puntuacion  Puntuación de la serie del 0 al 10
-	 * @param descripcion Descripción de la serie
-	 * @param fechaInicio Fecha de inicio de emisión (formato YYYY-MM-DD)
-	 * @param fechaFin    Fecha de fin de emisión (formato YYYY-MM-DD)
-	 * @param personajes  Personajes principales de la serie
-	 * @param temporadas  Número de temporadas de la serie
-	 * @param numCapitulos Número de capítulos de la serie
-	 * @param actores     Actores principales de la serie
-	 * @return true si la inserción fue correcta, false si hubo algún error
-	 */
-	public boolean insertarSerieEnBaseDeDatos(String titulo, String genero, int anio, float puntuacion, String descripcion,
-			String fechaInicio, String fechaFin, String personajes, int temporadas, int numCapitulos, String actores) {
-		
+	
+	public boolean insertaDatosPeli(Pelicula p) {
 		Connection conexion = null;
 		try {
 			conexion = DriverManager.getConnection(x, xx, xxx);
-			PreparedStatement consultaMultimedia = conexion.prepareStatement(
-					"INSERT INTO multimedia (titulo, genero, anio, puntuacion, descripcion, fechaInicio, fechaFin, personajes) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-					Statement.RETURN_GENERATED_KEYS);//le dice a la base de datos que devuelva el id que acaba de generar después del INSERT.
-			consultaMultimedia.setString(1, titulo);
-			consultaMultimedia.setString(2, genero);
-			consultaMultimedia.setInt(3, anio);
-			consultaMultimedia.setFloat(4, puntuacion);
-			consultaMultimedia.setString(5, descripcion);
-			consultaMultimedia.setString(6, fechaInicio);
-			consultaMultimedia.setString(7, fechaFin);
-			consultaMultimedia.setString(8, personajes);
-			consultaMultimedia.executeUpdate();
-
-
-			ResultSet registro = consultaMultimedia.getGeneratedKeys();
-			int idGenerado = 0;
-			//Utilizamos el campo Id que es el (1), entonces le decimos que mientras el registro sea el siguiente pues que añada al id siguiente del ultimo insertado,y que lo guarde en idGenerado
-			if (registro.next()) {
-				idGenerado = registro.getInt(1);
-			}
-
-
-			PreparedStatement consultaSerie = conexion.prepareStatement("INSERT INTO serie (id, temporadas, numCapitulos, actores) VALUES (?, ?, ?, ?)");
-			consultaSerie.setInt(1, idGenerado);
-			consultaSerie.setInt(2, temporadas);
-			consultaSerie.setInt(3, numCapitulos);
-			consultaSerie.setString(4, actores);
-			consultaSerie.executeUpdate();
+			PreparedStatement insertaPeli = conexion.prepareStatement("INSERT INTO pelicula (titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, personajes, duracion, actores) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			insertaPeli.setString(1, p.getTitulo());
+			insertaPeli.setString(2, p.getGenero().toString());
+			insertaPeli.setInt(3, p.getAnio());
+			insertaPeli.setString(4, p.getAutor());
+			insertaPeli.setFloat(5, p.getPuntuacion());
+			insertaPeli.setString(6, p.getDescripcion());
+			insertaPeli.setString(7, p.getFechaInicio());
+			insertaPeli.setString(8, p.getPersonajes());
+			insertaPeli.setInt(9, p.getDuracion());
+			insertaPeli.setString(10, p.getActores());
+			insertaPeli.executeUpdate();
 
 			return true;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 			return false;
-		}finally {
+		} finally {
 			try {
 				conexion.close();
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
-	/**
-	 * Obtiene todas las series de la base de datos
-	 * uniendo la tabla multimedia con la tabla serie
-	 * @return ArrayList con todas las series
-	 */
-	public ArrayList<Serie> consultarSeries() {
-	    ArrayList<Serie> arrSeries = new ArrayList<>();
-	    Connection conexion = null;
-	    try {
-	        conexion = DriverManager.getConnection(x, xx, xxx);
-	        PreparedStatement consulta = conexion.prepareStatement(
-	            "SELECT m.id, m.titulo, m.genero, m.anio, m.puntuacion, m.descripcion, " +
-	            "m.fechaInicio, m.fechaFin, m.personajes, " +
-	            "s.temporadas, s.numCapitulos, s.actores " +
-	            "FROM multimedia m " +
-	            "JOIN serie s ON m.id = s.id"
-	        );
-	        ResultSet registro = consulta.executeQuery();
-	        while (registro.next()) {
-	            Serie miSerie = new Serie();
-	            miSerie.setTitulo(registro.getString("titulo"));
-	            miSerie.setGenero(GENERO.valueOf(registro.getString("genero")));
-	            miSerie.setAnio(registro.getInt("anio"));
-	            miSerie.setPuntuacion(registro.getFloat("puntuacion"));
-	            miSerie.setDescripcion(registro.getString("descripcion"));
-	            miSerie.setFechaInicio(registro.getString("fechaInicio"));
-	            miSerie.setFechaFin(registro.getString("fechaFin"));
-	            miSerie.setPersonajes(registro.getString("personajes"));
-	            miSerie.setTemporadas(registro.getInt("temporadas"));
-	            miSerie.setNumCapitulos(registro.getInt("numCapitulos"));
-	            miSerie.setActores(registro.getString("actores"));
-	            arrSeries.add(miSerie);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        if (conexion != null) {
-	            try { conexion.close(); } catch (SQLException e) { e.printStackTrace(); }
-	        }
-	    }
-	    return arrSeries;
-	}
-
 	
 
 }

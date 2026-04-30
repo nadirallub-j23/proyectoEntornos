@@ -91,9 +91,6 @@ public class VntInsertaSerie extends JPanel {
 		scrollPane.setBounds(629, 92, 547, 170);
 		add(scrollPane);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane.setRowHeaderView(scrollPane_1);
-
 		textArea = new JTextArea(); 
 		scrollPane.setViewportView(textArea);
 

@@ -2,11 +2,16 @@ package vista;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 
+import controlador.BBDD;
+import modelo.Multimedia;
 import modelo.Multimedia.GENERO;
+import modelo.Pelicula;
 
 import javax.swing.JComboBox;
 import javax.swing.JSlider;
@@ -14,6 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VntInsertaPelicula extends JPanel {
 
@@ -155,6 +162,46 @@ public class VntInsertaPelicula extends JPanel {
 		add(txtActores);
 		
 		JButton btnModificar = new JButton("INSERTAR");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pelicula miPeli = new Pelicula();
+				BBDD miBd = new BBDD();
+				boolean correcto = false;
+				int anio;
+				anio=Integer.parseInt(textAnio.getText());
+				
+				
+				miPeli.setTitulo(txtTitulo.getText());
+				miPeli.setGenero(Multimedia.GENERO.valueOf(cmbGenero.getSelectedItem().toString()));
+				if(anio<1888||anio>2026) {
+					JOptionPane.showMessageDialog(null, "Año de publicación de la películaa incorrecto!!");
+					textAnio.setText("");
+				}else {
+					miPeli.setAnio(anio);
+				}
+				miPeli.setAutor(textDirector.getText());
+				miPeli.setPuntuacion(sliderPuntuacion.getValue());
+				miPeli.setDescripcion(textArea.getText());
+				miPeli.setDuracion((int) spinnerDuracion.getValue());
+				miPeli.setPersonajes(txtPersonajes.getText());
+	            miPeli.setActores(txtActores.getText());
+	            
+	            int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar a la película?");
+				if (valor==JOptionPane.OK_OPTION) {
+					correcto=miBd.insertaDatosPeli(miPeli);
+					if(correcto) {
+						JOptionPane.showMessageDialog(null, "Película guardada correctamente");
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "No se ha guardado a la película");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Se ha producido un error");
+				}
+				
+				
+			}
+		});
 		btnModificar.setForeground(new Color(44, 62, 80));
 		btnModificar.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		btnModificar.setBackground(new Color(0, 168, 84));
