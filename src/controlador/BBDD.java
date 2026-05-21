@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import modelo.Multimedia.GENERO;
 import modelo.Pelicula;
 import modelo.Serie;
+import modelo.Libro;
 import modelo.Multimedia;
 
 public class BBDD {
@@ -178,6 +179,40 @@ public class BBDD {
 	    		e.printStackTrace();
 	    	}
 	    }
+	}
+	
+	public boolean insertaDatosLibro(Libro libro) {
+		Connection conexion = null;
+		try {
+			conexion = DriverManager.getConnection(x, xx, xxx);
+
+			PreparedStatement insertaLibro = conexion.prepareStatement(
+					"INSERT INTO libro (titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, fechaFin, personajes, numPaginas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			insertaLibro.setString(1, libro.getTitulo());
+			insertaLibro.setString(2, libro.getGenero().toString());
+			insertaLibro.setInt(3, libro.getAnio());
+			insertaLibro.setString(4, libro.getAutor());
+			insertaLibro.setFloat(5, libro.getPuntuacion());
+			insertaLibro.setString(6, libro.getDescripcion());
+			insertaLibro.setString(7, libro.getFechaInicio());
+			insertaLibro.setString(8, libro.getFechaFin());
+			insertaLibro.setString(9, libro.getPersonajes());
+			insertaLibro.setInt(10, libro.getNumPaginas());
+			insertaLibro.executeUpdate();
+
+			return true;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 

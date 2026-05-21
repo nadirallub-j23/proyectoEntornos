@@ -96,6 +96,8 @@ public class VntPrincipal extends JFrame {
 		mntmLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//llamar con cambiapanel al inserta
+				VtnInsertaLibro libro = new VtnInsertaLibro();
+				cambiaPanel(libro);
 			}
 		});
 		mnNewMenu.add(mntmLibro);
