@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import controlador.BBDD;
 import modelo.Libro;
 import modelo.Multimedia.GENERO;
+import modelo.Pelicula;
 import modelo.Serie;
 
 import javax.swing.JButton;
@@ -62,13 +63,16 @@ public class VntConsulta extends JPanel {
 		tablaPeliculas.setRowHeight(25);
 		scrollPane.setViewportView(tablaPeliculas);
 		
-		modeloTablaPeliculas.setColumnIdentifiers(new Object[] {"Titulo", "Genero", "Año", "Director","Puntuacion","Descripcion",
+		modeloTablaPeliculas.setColumnIdentifiers(new Object[] {"id", "Titulo", "Genero", "Año", "Director","Puntuacion","Descripcion",
 				"Fecha de Inicio", "Personajes", "Duracion", "Actores"});
 				
-		tablaPeliculas.setModel(modeloTablaPeliculas);
-				
+		tablaPeliculas.setModel(modeloTablaPeliculas);				
 			
 		modeloTablaPeliculas.setRowCount(0);
+		tablaPeliculas.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaPeliculas.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaPeliculas.getColumnModel().getColumn(0).setWidth(0);
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(53, 594, 695, 341);
 		add(scrollPane_1);
@@ -199,8 +203,7 @@ public class VntConsulta extends JPanel {
 		
 		
 		cargarComboGenero(); //carga el combo de géneros con los valores del enum (ACCION, DRAMA, COMEDIA...) para que aparezcan en el desplegable cuando abres el panel
-	    cargarSeries();//consulta la base de datos y carga todas las series que tienes insertadas en la tabla tablaSeries para que las veas nada más abrir el panel.
-	    cargarLibros();
+		cargarTodasLasTablas();
 	}
 	
 	public void cargarComboGenero() {
@@ -278,5 +281,41 @@ public class VntConsulta extends JPanel {
 	    	    l.getNumPaginas()
 	    	});
 	    }
+	}
+	
+	/**
+	 * Carga las peliculas desde la base de datos
+	 */
+	public void cargarPeliculas() {
+		modeloTablaPeliculas.setRowCount(0); // limpiamos la tabla
+		BBDD bd = new BBDD();
+	    ArrayList<Pelicula> arrPelicula = new ArrayList<>();
+	    arrPelicula = bd.consultarPeliculas();
+	    
+	    for (Pelicula p : arrPelicula) {
+	    	
+	    	modeloTablaPeliculas.addRow(new Object[] {
+	    		p.getId(),
+	    	    p.getTitulo(),      
+	    	    p.getGenero(),       
+	    	    p.getAnio(),        
+	    	    p.getAutor(),        
+	    	    p.getPuntuacion(),   
+	    	    p.getDescripcion(),  
+	    	    p.getFechaInicio(),
+	    	    p.getPersonajes(),
+	    	    p.getDuracion(),
+	    	    p.getActores()
+	    	});
+	    }
+	}
+	
+	/**
+	 * Carga todas las tablas desde la base de datos
+	 */
+	public void cargarTodasLasTablas() {
+	    cargarSeries();
+	    cargarLibros();
+	    cargarPeliculas();
 	}
 }

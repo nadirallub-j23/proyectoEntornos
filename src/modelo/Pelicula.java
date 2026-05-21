@@ -5,6 +5,7 @@ public class Pelicula extends Multimedia {
 	// Atributos
 	private int duracion;
 	private String actores;
+	private int id;
 
 	//Constructor por defecto
 	public Pelicula() {
@@ -14,11 +15,20 @@ public class Pelicula extends Multimedia {
 	}
 
 	//Constructor por parametros
-	public Pelicula(String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
+	public Pelicula(int id, String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
 			String fechaInicio, String personajes, int duracion, String actores) {
 		super(titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, personajes);
 		this.duracion = duracion;
 		this.actores = actores;
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getDuracion() {

@@ -72,6 +72,12 @@ public class VntInsertaPelicula extends JPanel {
 		lblNewLabel_1_2_1_1.setBounds(26, 189, 94, 20);
 		add(lblNewLabel_1_2_1_1);
 		
+		JLabel lblFormatoInicio = new JLabel("(YYYY-MM-DD)");
+		lblFormatoInicio.setForeground(new Color(150, 150, 150));
+		lblFormatoInicio.setFont(new Font("Segoe UI", Font.ITALIC, 11));
+		lblFormatoInicio.setBounds(251, 378, 100, 20);
+		add(lblFormatoInicio);
+		
 		textAnio = new JTextField();
 		textAnio.setBounds(130, 192, 86, 20);
 		add(textAnio);
