@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -35,6 +37,7 @@ public class VntConsulta extends JPanel {
 	 * Create the panel.
 	 */
 	public VntConsulta() {
+		
 		setBackground(new Color(240, 242, 245));
 		setLayout(null);
 		
@@ -90,13 +93,16 @@ public class VntConsulta extends JPanel {
 		scrollPane_2.setViewportView(tablaSeries);
 		
 
-		modeloTablaSeries.setColumnIdentifiers(new Object[] {"Titulo", "Genero", "Año", "Director","Puntuacion","Descripcion",
+		modeloTablaSeries.setColumnIdentifiers(new Object[] {"id","Titulo", "Genero", "Año","Autor","Puntuacion","Descripcion",
 				"Fecha de Inicio", "Personajes", "Temporadas", "Nº capitulos", "Actores","Fecha de fin"});
 				
 		tablaSeries.setModel(modeloTablaSeries);
 				
 			
 		modeloTablaSeries.setRowCount(0);
+		tablaSeries.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaSeries.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaSeries.getColumnModel().getColumn(0).setWidth(0);
 		
 		JLabel lblMisLibros = new JLabel("MIS SERIES");
 		lblMisLibros.setForeground(new Color(44, 62, 80));
@@ -112,6 +118,47 @@ public class VntConsulta extends JPanel {
 		add(btnBorrar);
 		
 		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+
+		        int filaSeleccionada = tablaSeries.getSelectedRow();
+		        if (filaSeleccionada == -1) {
+		            JOptionPane.showMessageDialog(null, "Selecciona una serie a modificar");
+		            return;
+		        }
+
+		        if (tablaSeries.isEditing()) {
+		            tablaSeries.getCellEditor().stopCellEditing();
+		        }
+
+		        int confirmacion = JOptionPane.showConfirmDialog(null,
+		            "¿Seguro que deseas modificar la serie?",
+		            "Confirmar modificación",
+		            JOptionPane.YES_NO_OPTION);
+
+		        if (confirmacion == JOptionPane.YES_OPTION) {
+		            int id = Integer.parseInt(modeloTablaSeries.getValueAt(filaSeleccionada, 0).toString()); // ← id oculto
+		            String titulo = modeloTablaSeries.getValueAt(filaSeleccionada, 1).toString();
+		            String genero = modeloTablaSeries.getValueAt(filaSeleccionada, 2).toString();
+		            int anio = Integer.parseInt(modeloTablaSeries.getValueAt(filaSeleccionada, 3).toString());
+		            String autor = modeloTablaSeries.getValueAt(filaSeleccionada, 4).toString();
+		            Float puntuacion = Float.parseFloat(modeloTablaSeries.getValueAt(filaSeleccionada, 5).toString());
+		            String descripcion = modeloTablaSeries.getValueAt(filaSeleccionada, 6).toString();
+		            String fechaInicio = modeloTablaSeries.getValueAt(filaSeleccionada, 7).toString();
+		            String personajes = modeloTablaSeries.getValueAt(filaSeleccionada, 8).toString();
+		            int temporadas = Integer.parseInt(modeloTablaSeries.getValueAt(filaSeleccionada, 9).toString());
+		            int numCapitulos = Integer.parseInt(modeloTablaSeries.getValueAt(filaSeleccionada, 10).toString());
+		            String actores = modeloTablaSeries.getValueAt(filaSeleccionada, 11).toString();
+		            String fechaFin = modeloTablaSeries.getValueAt(filaSeleccionada, 12).toString();
+
+		            bd.modificarSerie(id, titulo, genero, anio, autor, puntuacion, descripcion,
+		                              fechaInicio, personajes, temporadas, numCapitulos, actores, fechaFin);
+		            JOptionPane.showMessageDialog(null, "Serie modificada correctamente");
+		            
+		        }
+		        cargarSeries();
+		    }
+		});
 		btnModificar.setBackground(new Color(52, 152, 219)); 
 		btnModificar.setForeground(new Color(44, 62, 80));
 		btnModificar.setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -179,22 +226,26 @@ public class VntConsulta extends JPanel {
 	    modeloTablaSeries.setRowCount(0); // limpiamos la tabla
 	    BBDD bd = new BBDD();
 	    ArrayList<Serie> arrSeries = new ArrayList<>();
-	    //arrSeries = bd.consultarSeries();
+	    arrSeries = bd.consultarSeries();
+	    
+	    //System.out.println("series: " + arrSeries.size());
 	    for (Serie s : arrSeries) {
-	        modeloTablaSeries.addRow(new Object[] {
-	            s.getTitulo(),
-	            s.getGenero(),
-	            s.getAnio(),
-	            "", // director no existe en serie
-	            s.getPuntuacion(),
-	            s.getDescripcion(),
-	            s.getFechaInicio(),
-	            s.getPersonajes(),
-	            s.getTemporadas(),
-	            s.getNumCapitulos(),
-	            s.getActores(),
-	            s.getFechaFin()
-	        });
+	    	
+	    	modeloTablaSeries.addRow(new Object[] {
+	    		s.getId(),
+	    	    s.getTitulo(),      
+	    	    s.getGenero(),       
+	    	    s.getAnio(),        
+	    	    s.getAutor(),        
+	    	    s.getPuntuacion(),   
+	    	    s.getDescripcion(),  
+	    	    s.getFechaInicio(), 
+	    	    s.getPersonajes(),   
+	    	    s.getTemporadas(),   
+	    	    s.getNumCapitulos(), 
+	    	    s.getActores(),      
+	    	    s.getFechaFin()      
+	    	});
 	    }
 	}
 }
