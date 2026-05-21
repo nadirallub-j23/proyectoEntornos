@@ -28,8 +28,6 @@ public class VntPrincipal extends JFrame {
 	 * Launch the application.
 	 */
 	
-	
-    
 	public static void main(String[] args) {
 		BBDD bd = new BBDD();
 	    if (!bd.verificarConexion()) {

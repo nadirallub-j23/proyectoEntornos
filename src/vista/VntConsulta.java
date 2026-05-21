@@ -179,7 +179,7 @@ public class VntConsulta extends JPanel {
 	    modeloTablaSeries.setRowCount(0); // limpiamos la tabla
 	    BBDD bd = new BBDD();
 	    ArrayList<Serie> arrSeries = new ArrayList<>();
-	    arrSeries = bd.consultarSeries();
+	    //arrSeries = bd.consultarSeries();
 	    for (Serie s : arrSeries) {
 	        modeloTablaSeries.addRow(new Object[] {
 	            s.getTitulo(),

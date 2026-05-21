@@ -67,5 +67,41 @@ public class BBDD {
 		}
 	}
 	
+	public boolean insertaDatosSerie(Serie serie) {
+	    Connection conexion = null;
+	    try {
+	        conexion = DriverManager.getConnection(x, xx, xxx);
+
+	        PreparedStatement insertaSerie = conexion.prepareStatement(
+	            "INSERT INTO serie (titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, fechaFin, personajes, temporadas, numCapitulos, actores) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+	        insertaSerie.setString(1, serie.getTitulo());
+	        insertaSerie.setString(2, serie.getGenero().toString());
+	        insertaSerie.setInt(3, serie.getAnio());
+	        insertaSerie.setString(4, serie.getAutor());
+	        insertaSerie.setFloat(5, serie.getPuntuacion());
+	        insertaSerie.setString(6, serie.getDescripcion());
+	        insertaSerie.setString(7, serie.getFechaInicio());   
+	        insertaSerie.setString(8, serie.getFechaFin());     
+	        insertaSerie.setString(9, serie.getPersonajes());
+	        insertaSerie.setInt(10, serie.getTemporadas());
+	        insertaSerie.setInt(11, serie.getNumCapitulos());
+	        insertaSerie.setString(12, serie.getActores());
+	        insertaSerie.executeUpdate();
+	        
+	        return true;
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	        return false;
+
+	    } finally {
+	        try {
+	            conexion.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
 
 }
