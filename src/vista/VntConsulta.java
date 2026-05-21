@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.BBDD;
+import modelo.Libro;
 import modelo.Multimedia.GENERO;
 import modelo.Serie;
 
@@ -76,13 +77,16 @@ public class VntConsulta extends JPanel {
 		tablaLibros.setRowHeight(25);
 		scrollPane_1.setViewportView(tablaLibros);
 		
-		modeloTablaLibros.setColumnIdentifiers(new Object[] {"Titulo", "Genero", "Año", "Autor","Puntuacion","Descripcion",
-				"Fecha de Inicio", "Personajes", "Nº paginas", "Fecha de fin"});
+		modeloTablaLibros.setColumnIdentifiers(new Object[] {"id","Titulo", "Genero", "Año", "Autor","Puntuacion","Descripcion",
+				"Fecha de Inicio", "Fecha de fin", "Personajes", "Nº paginas"});
 				
 		tablaLibros.setModel(modeloTablaLibros);
 				
 			
 		modeloTablaLibros.setRowCount(0);
+		tablaLibros.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaLibros.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaLibros.getColumnModel().getColumn(0).setWidth(0);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(886, 147, 695, 341);
@@ -196,7 +200,7 @@ public class VntConsulta extends JPanel {
 		
 		cargarComboGenero(); //carga el combo de géneros con los valores del enum (ACCION, DRAMA, COMEDIA...) para que aparezcan en el desplegable cuando abres el panel
 	    cargarSeries();//consulta la base de datos y carga todas las series que tienes insertadas en la tabla tablaSeries para que las veas nada más abrir el panel.
-
+	    cargarLibros();
 	}
 	
 	public void cargarComboGenero() {
@@ -245,6 +249,33 @@ public class VntConsulta extends JPanel {
 	    	    s.getNumCapitulos(), 
 	    	    s.getActores(),      
 	    	    s.getFechaFin()      
+	    	});
+	    }
+	}
+	
+	/**
+	 * Carga los libros desde la base de datos
+	 */
+	public void cargarLibros() {
+		modeloTablaLibros.setRowCount(0); // limpiamos la tabla
+		BBDD bd = new BBDD();
+	    ArrayList<Libro> arrLibros = new ArrayList<>();
+	    arrLibros = bd.consultarLibros();
+	    
+	    for (Libro l : arrLibros) {
+	    	
+	    	modeloTablaLibros.addRow(new Object[] {
+	    		l.getId(),
+	    	    l.getTitulo(),      
+	    	    l.getGenero(),       
+	    	    l.getAnio(),        
+	    	    l.getAutor(),        
+	    	    l.getPuntuacion(),   
+	    	    l.getDescripcion(),  
+	    	    l.getFechaInicio(),
+	    	    l.getFechaFin(),
+	    	    l.getPersonajes(),
+	    	    l.getNumPaginas()
 	    	});
 	    }
 	}

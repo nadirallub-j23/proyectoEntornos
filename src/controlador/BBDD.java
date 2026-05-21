@@ -215,5 +215,41 @@ public class BBDD {
 		}
 	}
 	
+	public ArrayList<Libro> consultarLibros() {
+		ArrayList<Libro> arrLibros = new ArrayList<>();
+		Connection conexion = null;
+		try {
+			conexion = DriverManager.getConnection(x, xx, xxx);
+			PreparedStatement consulta = conexion.prepareStatement("SELECT * FROM libro");
+			ResultSet registro = consulta.executeQuery();
 
+			while (registro.next()) {
+				Libro l = new Libro();
+				l.setId(registro.getInt("id"));
+				l.setTitulo(registro.getString("titulo"));
+				l.setGenero(GENERO.valueOf(registro.getString("genero")));
+				l.setAnio(registro.getInt("anio"));
+				l.setAutor(registro.getString("autor"));
+				l.setPuntuacion(registro.getFloat("puntuacion"));
+				l.setDescripcion(registro.getString("descripcion"));
+				l.setFechaInicio(registro.getString("fechaInicio"));
+				l.setFechaFin(registro.getString("fechaFin"));
+				l.setPersonajes(registro.getString("personajes"));
+				l.setNumPaginas(registro.getInt("numPaginas"));
+				
+				arrLibros.add(l);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return arrLibros;
+	}
 }

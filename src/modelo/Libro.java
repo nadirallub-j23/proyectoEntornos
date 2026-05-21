@@ -5,6 +5,7 @@ public class Libro extends Multimedia {
 	// Atributos
 	private int numPaginas;
 	private String fechaFin;
+	private int id;
 
 	// Constructor por defecto
 	public Libro() {
@@ -16,13 +17,22 @@ public class Libro extends Multimedia {
 	}
 
 	// Constructor por parametros
-	public Libro(String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
+	public Libro(int id, String titulo, GENERO genero, int anio, String autor, float puntuacion, String descripcion,
 			String fechaInicio, String personajes, int numPaginas, String fechaFin) {
 		super(titulo, genero, anio, autor, puntuacion, descripcion, fechaInicio, personajes);
 		this.numPaginas = numPaginas;
 		this.fechaFin = fechaFin;
+		this.id = id;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public int getNumPaginas() {
 		return numPaginas;
 	}
