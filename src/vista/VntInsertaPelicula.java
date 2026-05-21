@@ -45,32 +45,32 @@ public class VntInsertaPelicula extends JPanel {
 		lblPeliculaNueva.setBounds(10, 21, 199, 33);
 		add(lblPeliculaNueva);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("Título:");
-		lblNewLabel_1_2.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2.setBounds(26, 87, 94, 20);
-		add(lblNewLabel_1_2);
+		JLabel lblNewLabeltTitulo = new JLabel("Título:");
+		lblNewLabeltTitulo.setForeground(new Color(44, 62, 80));
+		lblNewLabeltTitulo.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabeltTitulo.setBounds(26, 87, 94, 20);
+		add(lblNewLabeltTitulo);
 		
 		txtTitulo = new JTextField();
 		txtTitulo.setBounds(130, 90, 296, 20);
 		add(txtTitulo);
 		txtTitulo.setColumns(10);
 		
-		JLabel lblNewLabel_1_2_1 = new JLabel("Género:");
-		lblNewLabel_1_2_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1.setBounds(26, 138, 94, 20);
-		add(lblNewLabel_1_2_1);
+		JLabel lblNewLabelGenero = new JLabel("Género:");
+		lblNewLabelGenero.setForeground(new Color(44, 62, 80));
+		lblNewLabelGenero.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelGenero.setBounds(26, 138, 94, 20);
+		add(lblNewLabelGenero);
 		
 		cmbGenero = new JComboBox();
 		cmbGenero.setBounds(130, 140, 296, 22);
 		add(cmbGenero);
 		
-		JLabel lblNewLabel_1_2_1_1 = new JLabel("Año:");
-		lblNewLabel_1_2_1_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1.setBounds(26, 189, 94, 20);
-		add(lblNewLabel_1_2_1_1);
+		JLabel lblNewLabelAnio = new JLabel("Año:");
+		lblNewLabelAnio.setForeground(new Color(44, 62, 80));
+		lblNewLabelAnio.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelAnio.setBounds(26, 189, 94, 20);
+		add(lblNewLabelAnio);
 		
 		JLabel lblFormatoInicio = new JLabel("(YYYY-MM-DD)");
 		lblFormatoInicio.setForeground(new Color(150, 150, 150));
@@ -83,22 +83,22 @@ public class VntInsertaPelicula extends JPanel {
 		add(textAnio);
 		textAnio.setColumns(10);
 		
-		JLabel lblNewLabel_1_2_1_1_1 = new JLabel("Director:");
-		lblNewLabel_1_2_1_1_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1.setBounds(26, 242, 94, 20);
-		add(lblNewLabel_1_2_1_1_1);
+		JLabel lblNewLabelDirector = new JLabel("Director:");
+		lblNewLabelDirector.setForeground(new Color(44, 62, 80));
+		lblNewLabelDirector.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelDirector.setBounds(26, 242, 94, 20);
+		add(lblNewLabelDirector);
 		
 		textDirector = new JTextField();
 		textDirector.setColumns(10);
 		textDirector.setBounds(130, 245, 296, 20);
 		add(textDirector);
 		
-		JLabel lblNewLabel_1_2_1_1_1_1 = new JLabel("Puntuación:");
-		lblNewLabel_1_2_1_1_1_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1_1.setBounds(26, 304, 94, 20);
-		add(lblNewLabel_1_2_1_1_1_1);
+		JLabel lblNewLabelPuntuacion = new JLabel("Puntuación:");
+		lblNewLabelPuntuacion.setForeground(new Color(44, 62, 80));
+		lblNewLabelPuntuacion.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelPuntuacion.setBounds(26, 304, 94, 20);
+		add(lblNewLabelPuntuacion);
 		
 		JSlider sliderPuntuacion = new JSlider();
 		sliderPuntuacion.setPaintTicks(true);
@@ -111,11 +111,11 @@ public class VntInsertaPelicula extends JPanel {
 		sliderPuntuacion.setBounds(130, 293, 296, 54);
 		add(sliderPuntuacion);
 		
-		JLabel lblNewLabel_1_2_1_1_1_1_1 = new JLabel("Descripción: ");
-		lblNewLabel_1_2_1_1_1_1_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1_1_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1_1_1.setBounds(525, 87, 94, 20);
-		add(lblNewLabel_1_2_1_1_1_1_1);
+		JLabel lblNewLabelDescripcion = new JLabel("Descripción: ");
+		lblNewLabelDescripcion.setForeground(new Color(44, 62, 80));
+		lblNewLabelDescripcion.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelDescripcion.setBounds(525, 87, 94, 20);
+		add(lblNewLabelDescripcion);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(629, 92, 547, 170);
@@ -124,43 +124,43 @@ public class VntInsertaPelicula extends JPanel {
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		
-		JLabel lblNewLabel_1_2_1_1_1_1_2 = new JLabel("Fecha: ");
-		lblNewLabel_1_2_1_1_1_1_2.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1_1_2.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1_1_2.setBounds(26, 376, 94, 20);
-		add(lblNewLabel_1_2_1_1_1_1_2);
+		JLabel lblNewLabelFecha = new JLabel("Fecha: ");
+		lblNewLabelFecha.setForeground(new Color(44, 62, 80));
+		lblNewLabelFecha.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelFecha.setBounds(26, 376, 94, 20);
+		add(lblNewLabelFecha);
 		
 		txtFecha = new JTextField();
 		txtFecha.setColumns(10);
 		txtFecha.setBounds(130, 379, 111, 20);
 		add(txtFecha);
 		
-		JLabel lblNewLabel_1_2_1_1_1_1_2_1 = new JLabel("Personajes:");
-		lblNewLabel_1_2_1_1_1_1_2_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1_1_2_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1_1_2_1.setBounds(26, 431, 94, 20);
-		add(lblNewLabel_1_2_1_1_1_1_2_1);
+		JLabel lblNewLabelPersonajes = new JLabel("Personajes:");
+		lblNewLabelPersonajes.setForeground(new Color(44, 62, 80));
+		lblNewLabelPersonajes.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelPersonajes.setBounds(26, 431, 94, 20);
+		add(lblNewLabelPersonajes);
 		
 		txtPersonajes = new JTextField();
 		txtPersonajes.setColumns(10);
 		txtPersonajes.setBounds(130, 434, 296, 20);
 		add(txtPersonajes);
 		
-		JLabel lblNewLabel_1_2_1_1_1_1_2_1_1 = new JLabel("Duración:");
-		lblNewLabel_1_2_1_1_1_1_2_1_1.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1_1_2_1_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1_1_2_1_1.setBounds(26, 494, 94, 20);
-		add(lblNewLabel_1_2_1_1_1_1_2_1_1);
+		JLabel lblNewLabelDuracion = new JLabel("Duración:");
+		lblNewLabelDuracion.setForeground(new Color(44, 62, 80));
+		lblNewLabelDuracion.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelDuracion.setBounds(26, 494, 94, 20);
+		add(lblNewLabelDuracion);
 		
 		JSpinner spinnerDuracion = new JSpinner();
 		spinnerDuracion.setBounds(130, 497, 49, 20);
 		add(spinnerDuracion);
 		
-		JLabel lblNewLabel_1_2_1_1_1_1_2_1_2 = new JLabel("Actores:");
-		lblNewLabel_1_2_1_1_1_1_2_1_2.setForeground(new Color(44, 62, 80));
-		lblNewLabel_1_2_1_1_1_1_2_1_2.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblNewLabel_1_2_1_1_1_1_2_1_2.setBounds(26, 562, 94, 20);
-		add(lblNewLabel_1_2_1_1_1_1_2_1_2);
+		JLabel lblNewLabelActores = new JLabel("Actores:");
+		lblNewLabelActores.setForeground(new Color(44, 62, 80));
+		lblNewLabelActores.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblNewLabelActores.setBounds(26, 562, 94, 20);
+		add(lblNewLabelActores);
 		
 		txtActores = new JTextField();
 		txtActores.setColumns(10);
@@ -198,7 +198,7 @@ public class VntInsertaPelicula extends JPanel {
 					correcto=miBd.insertaDatosPeli(miPeli);
 					if(correcto) {
 						JOptionPane.showMessageDialog(null, "Película guardada correctamente");
-						
+						limpiarCampos();						
 					}else {
 						JOptionPane.showMessageDialog(null, "No se ha guardado a la película");
 					}
@@ -224,5 +224,15 @@ public class VntInsertaPelicula extends JPanel {
 	    for (GENERO g : GENERO.values()) {
 	        cmbGenero.addItem(g);
 	    }
+	}
+	
+	public void limpiarCampos() {
+		txtTitulo.setText("");
+		textAnio.setText("");
+		textDirector.setText("");
+		txtFecha.setText("");
+		txtPersonajes.setText("");
+		txtActores.setText("");
+		cmbGenero.setSelectedIndex(0);
 	}
 }
