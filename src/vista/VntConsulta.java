@@ -77,7 +77,7 @@ public class VntConsulta extends JPanel {
 		tablaLibros.setRowHeight(25);
 		scrollPane_1.setViewportView(tablaLibros);
 		
-		modeloTablaLibros.setColumnIdentifiers(new Object[] {"id","Titulo", "Genero", "Año", "Autor","Puntuacion","Descripcion",
+		modeloTablaLibros.setColumnIdentifiers(new Object[] {"id","Titulo", "Genero", "Año", "Autor", "Puntuacion", "Descripcion",
 				"Fecha de Inicio", "Fecha de fin", "Personajes", "Nº paginas"});
 				
 		tablaLibros.setModel(modeloTablaLibros);
